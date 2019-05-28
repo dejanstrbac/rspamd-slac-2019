@@ -1,0 +1,2 @@
+MILTERSOCKET=inet:60001@127.0.0.1
+AMAVISSOCKET=/var/lib/amavis/amavisd.sock

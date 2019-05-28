@@ -1,0 +1,44 @@
+use strict;
+
+@virus_name_to_spam_score_maps =
+  (new_RE(  # the order matters!
+    [ qr'^Structured\.(SSN|CreditCardNumber)\b'            => 3.5 ],
+    [ qr'^(Heuristics\.)?Phishing\.'                       => 3.5 ],
+    [ qr'^(Email|HTML)\.Phishing\.(?!.*Sanesecurity)'      => 3.5 ],
+    [ qr'^Sanesecurity\.(Malware|Rogue|Trojan)\.' => undef ],# keep asinfected
+    [ qr'^Sanesecurity\.Junk\.'                            => 7.0 ],
+    [ qr'^Sanesecurity\.Scam'                              => 7.0 ],
+    [ qr'^Sanesecurity\.Spam\.'                            => 7.0 ],
+    [ qr'^Sanesecurity\.Spam4\.'                           => 7.0 ],
+    [ qr'^Sanesecurity\.SpamL\.'                           => 7.0 ],
+    [ qr'^Sanesecurity\.Jurlbl\.'                          => 7.0 ],
+    [ qr'^Sanesecurity\.Phishing\.'                        => 7.0 ],
+    [ qr'^Sanesecurity\.'                                  => 3.5 ],
+    [ qr'^Sanesecurity_PhishBar_'                          => 0   ],
+    [ qr'^Sanesecurity.TestSig_'                           => 0   ],
+    [ qr'^Doppelstern\.(Scam4|Phishing)'                   => 7.0 ],
+    [ qr'^Doppelstern\.Hoax\.'                             => 7.0 ],
+    [ qr'^Doppelstern\.Lott\.'                             => 7.0 ],
+    [ qr'^Doppelstern\.Loan\.'                             => 7.0 ],
+    [ qr'^Doppelstern\.Junk\.'                             => 7.0 ],
+    [ qr'^Doppelstern\.'                                   => 3.5 ],
+    [ qr'^Email\.Spam\.Bounce(\.[^., ]*)*\.Sanesecurity\.' => 0   ],
+    [ qr'^Email\.Spammail\b'                               => 7.0 ],
+    [ qr'^Email\.Phishing'                                 => 7.0 ],
+    [ qr'^MSRBL-(Images|SPAM)\b'                           => 3.5 ],
+    [ qr'^VX\.Honeypot-SecuriteInfo\.com\.Joke'            => 3.5 ],
+    [ qr'^VX\.not-virus_(Hoax|Joke)\..*-SecuriteInfo\.com(\.|\z)' => 3.5 ],
+    [ qr'^Email\.Spam.*-SecuriteInfo\.com(\.|\z)'          => 3.5 ],
+    [ qr'^Safebrowsing\.'                                  => 3.5 ],
+    [ qr'^winnow\.(phish|spam)\.'                          => 7.0 ],
+    [ qr'^INetMsg\.SpamDomain'                             => 3.5 ],
+    [ qr'^ScamNailer\.Phish\.'                             => 7.0 ],
+    [ qr'^ScamNailer\.'                                    => 3.5 ],
+    [ qr'^HTML/Bankish'                                    => 3.5 ],  #F-Prot
+    [ qr'-SecuriteInfo\.com(\.|\z)'         => undef ],  # keep as infected
+    [ qr'^MBL_NA\.UNOFFICIAL'               => 0.1 ],    # false positives
+    [ qr'^MBL_'                             => undef ],  # keep as infected
+  ));
+
+#------------ Do not modify anything below this line -------------
+1;
